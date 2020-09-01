@@ -1,13 +1,8 @@
 const test = require("ava")
-const theModule = require(".")
+const isArrayBuffer = require("is-array-buffer")
+const { promises: fs } = require("fs")
+const webmToMp4 = require(".")
 
-test("main", t => {
-	t.throws(() => {
-		theModule(123)
-	}, {
-		instanceOf: TypeError,
-		message: "Expected a string, got number"
-	})
-
-	t.is(theModule("unicorns"), "unicorns & rainbows")
+test("main", async t => {
+	t.true(isArrayBuffer(webmToMp4(await fs.readFile("fixture.webm"))))
 })

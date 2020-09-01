@@ -1,8 +1,8 @@
 {
-	"name": "the-module",
+	"name": "webm-to-mp4",
 	"version": "0.0.0",
-	"description": "My awesome module.",
-	"repository": "https://github.com/Richienb/the-module.git",
+	"description": "Convert a webm video to mp4.",
+	"repository": "https://github.com/Richienb/webm-to-mp4.git",
 	"author": "Richie Bendall <richiebendall@gmail.com>",
 	"license": "MIT",
 	"main": "index.js",
@@ -17,14 +17,34 @@
 		"lint": "xo",
 		"test": "xo && ava"
 	},
-	"keywords": [],
-	"dependencies": {},
+	"keywords": [
+		"webm",
+		"mp4",
+		"convert",
+		"encode",
+		"mediarecorder",
+		"vp9",
+		"codec",
+		"ffmpeg"
+	],
+	"dependencies": {
+		"ffmpeg.js": "^4.2.9003"
+	},
 	"devDependencies": {
 		"ava": "^3.11.1",
 		"eslint-config-richienb": "^0.4.2",
+		"is-array-buffer": "^1.0.1",
 		"xo": "^0.33.0"
 	},
 	"xo": {
-		"extends": "richienb"
+		"extends": "richienb",
+		"overrides": [
+			{
+				"files": "test.js",
+				"rules": {
+					"node/no-unsupported-features/node-builtins": 0
+				}
+			}
+		]
 	}
 }

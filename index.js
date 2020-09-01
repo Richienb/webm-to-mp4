@@ -1,9 +1,24 @@
 "use strict"
 
-module.exports = (input, { postfix = "rainbows" } = {}) => {
-	if (typeof input !== "string") {
-		throw new TypeError(`Expected a string, got ${typeof input}`)
-	}
+const ffmpeg = require("ffmpeg.js/ffmpeg-mp4")
 
-	return `${input} & ${postfix}`
+module.exports = webmData => {
+	let stderr = ""
+
+	return ffmpeg({
+		MEMFS: [{
+			name: "input.webm",
+			data: Uint8Array.from(webmData)
+		}],
+		arguments: ["-i", "input.webm", "-codec", "copy", "-strict", "-2", "output.mp4"],
+		print: () => {},
+		printErr: data => {
+			stderr += data
+		},
+		onExit: code => {
+			if (code !== 0) {
+				throw new Error(`Conversion error: ${stderr}`)
+			}
+		}
+	}).MEMFS[0].data.buffer
 }

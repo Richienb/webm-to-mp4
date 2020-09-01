@@ -1,41 +1,32 @@
-# the-module [![Travis CI Build Status](https://img.shields.io/travis/com/Richienb/the-module/master.svg?style=for-the-badge)](https://travis-ci.com/Richienb/the-module)
+# webm-to-mp4 [![Travis CI Build Status](https://img.shields.io/travis/com/Richienb/webm-to-mp4/master.svg?style=for-the-badge)](https://travis-ci.com/Richienb/webm-to-mp4)
 
-My awesome module.
+Convert a webm video to mp4.
 
-[![NPM Badge](https://nodei.co/npm/the-module.png)](https://npmjs.com/package/the-module)
+Useful for handling [MediaRecorder](https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder) output.
+
+[![NPM Badge](https://nodei.co/npm/webm-to-mp4.png)](https://npmjs.com/package/webm-to-mp4)
 
 ## Install
 
 ```sh
-npm install the-module
+npm install webm-to-mp4
 ```
 
 ## Usage
 
 ```js
-const theModule = require("the-module");
+const { promises: fs } = require("fs");
+const webmToMp4 = require("webm-to-mp4");
 
-theModule("unicorns");
-//=> 'unicorns & rainbows'
+await fs.writeFile("file.mp4", Buffer.from(webmToMp4(await fs.readFile("file.webm"))));
 ```
 
 ## API
 
-### theModule(input, options?)
+### webmToMp4(webmData)
 
 #### input
 
-Type: `string`
+Type: `Iterable` (includes Buffers, ArrayBuffers and Uint8Arrays)
 
-Lorem ipsum.
-
-#### options
-
-Type: `object`
-
-##### postfix
-
-Type: `string`\
-Default: `rainbows`
-
-Lorem ipsum.
+The webm data to convert.
